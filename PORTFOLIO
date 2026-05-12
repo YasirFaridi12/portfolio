@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YASIR FARIDI | Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #16161f;
+    --accent: #7c6cfa;
+    --accent2: #a78bfa;
+    --accent3: #c4b5fd;
+    --text: #f0eeff;
+    --text2: #9d97c4;
+    --text3: #5a5478;
+    --border: rgba(124, 108, 250, 0.15);
+    --border2: rgba(124, 108, 250, 0.3);
+    --card: #13131c;
+    --glow: rgba(124, 108, 250, 0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+    cursor: default;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em;
+    color: var(--text2); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(124,108,250,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(167,139,250,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95; letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .hero h1 .outline {
+    -webkit-text-stroke: 1px var(--accent2);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 500; color: var(--accent2);
+    margin: 1rem 0 1.8rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-bio {
+    font-size: 1rem; color: var(--text2);
+    max-width: 500px; line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.8rem;
+    border-radius: 4px; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+  .btn-outline:hover { color: var(--accent2); border-color: var(--accent2); transform: translateY(-2px); }
+
+  .hero-badges {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem;
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2px;
+    border: 1px solid var(--border2);
+    color: var(--accent3);
+    background: rgba(124,108,250,0.05);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 3rem;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.15em; color: var(--text3); text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-scroll::after {
+    content: ''; width: 60px; height: 1px;
+    background: linear-gradient(90deg, var(--text3), transparent);
+  }
+
+  /* BIG NUMBER STATS */
+  .stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    margin-top: 3rem; padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem; font-weight: 800;
+    color: var(--text); line-height: 1;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.75rem; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: attr(data-num);
+    font-size: 0.65rem; color: var(--text3);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .section-title em { color: var(--accent2); font-style: normal; }
+  .section-desc {
+    font-size: 1rem; color: var(--text2); max-width: 480px;
+    line-height: 1.8; margin-bottom: 3rem;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px; background: var(--border);
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-text p { color: var(--text2); line-height: 1.9; margin-bottom: 1.2rem; }
+  .about-text p strong { color: var(--accent2); font-weight: 500; }
+  .about-image-area {
+    position: relative;
+    height: 380px;
+  }
+  .about-card-big {
+    position: absolute; inset: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem;
+  }
+  .avatar-placeholder {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800;
+    color: #fff; margin-bottom: 0.5rem;
+  }
+  .about-card-big h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700;
+    color: var(--text);
+  }
+  .about-card-big p { font-size: 0.85rem; color: var(--text3); }
+  .about-tag-row {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; justify-content: center;
+  }
+  .about-float {
+    position: absolute; right: -1rem; top: 1rem;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 6px; padding: 0.6rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--accent2); white-space: nowrap;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-cat {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .skill-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.5rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+  .skill-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    padding: 0.25rem 0.6rem; border-radius: 2px;
+    border: 1px solid var(--border2);
+    color: var(--text2); background: rgba(124,108,250,0.04);
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0.75rem; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem; padding-left: 1.5rem;
+  }
+  .timeline-dot {
+    position: absolute; left: -2.4rem; top: 0.4rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    box-shadow: 0 0 0 4px rgba(124,108,250,0.15);
+  }
+  .timeline-date {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-item h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.25rem;
+  }
+  .timeline-item .org { color: var(--accent2); font-size: 0.9rem; margin-bottom: 0.6rem; }
+  .timeline-item p { color: var(--text2); font-size: 0.9rem; line-height: 1.8; }
+  .timeline-item ul { color: var(--text2); font-size: 0.9rem; line-height: 2; padding-left: 1.2rem; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .project-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .project-icon {
+    width: 40px; height: 40px; border-radius: 6px;
+    background: rgba(124,108,250,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .project-links { display: flex; gap: 0.5rem; }
+  .project-link {
+    width: 32px; height: 32px; border-radius: 4px;
+    border: 1px solid var(--border2); color: var(--text3);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 0.85rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .project-link:hover { color: var(--accent2); border-color: var(--accent2); }
+  .project-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+    color: var(--text);
+  }
+  .project-card p { font-size: 0.88rem; color: var(--text2); line-height: 1.8; flex: 1; }
+  .project-lang {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    color: var(--text3);
+  }
+  .lang-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  }
+  .lang-dot.cpp { background: #f34b7d; }
+  .lang-dot.html { background: #e44b23; }
+  .lang-dot.py { background: #3572A5; }
+
+  /* CONTACT */
+  .contact-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-left h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800;
+    color: var(--text); margin-bottom: 1rem; line-height: 1.2;
+  }
+  .contact-left p { color: var(--text2); line-height: 1.9; margin-bottom: 1.5rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none; color: var(--text2);
+    padding: 0.9rem 1.2rem; border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent2); transform: translateX(4px); }
+  .contact-link-icon {
+    width: 36px; height: 36px; border-radius: 4px;
+    background: rgba(124,108,250,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-link-text { font-size: 0.85rem; }
+  .contact-link-label { font-size: 0.65rem; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3);
+  }
+  .form-group input, .form-group textarea {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px; padding: 0.75rem 1rem;
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { min-height: 120px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 100%;
+  }
+  .footer-left {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    color: var(--text3); letter-spacing: 0.1em;
+  }
+  .footer-right {
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    color: var(--text);
+  }
+  .footer-right span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.7s ease both; }
+  .hero .hero-label { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-bio { animation-delay: 0.35s; }
+  .hero-badges { animation-delay: 0.4s; }
+  .hero-btns { animation-delay: 0.45s; }
+  .stats { animation-delay: 0.55s; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+    .about-image-area { height: 260px; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">EG<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Available for opportunities</div>
+  <h1>Ezan<br><span class="outline">Gulzar</span></h1>
+  <div class="hero-sub">B.Tech CSE Student &amp; Developer</div>
+  <p class="hero-bio">
+    Focused on data structures, algorithms, and problem solving using C++, while building modern web applications. Continuously improving through real-world practice and open-source work.
+  </p>
+  <div class="hero-badges">
+    <span class="badge">C++</span>
+    <span class="badge">DSA</span>
+    <span class="badge">Python</span>
+    <span class="badge">Web Dev</span>
+    <span class="badge">LeetCode</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="https://github.com/Ezangulzar314" target="_blank" class="btn btn-outline">GitHub Profile</a>
+  </div>
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">7<span>+</span></div>
+      <div class="stat-label">Repositories</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-label">Skills</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span>rd</span></div>
+      <div class="stat-label">Year, B.Tech</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Problems Solved</div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label" data-num="01 —">About me</div>
+  <div class="section-title">Who I <em>Am</em></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm <strong>Ezan Gulzar</strong>, a B.Tech CSE student at AKTU University (3rd Year) based in Varanasi, India — passionate about writing clean code, solving hard problems, and building things that matter.
+      </p>
+      <p>
+        My core focus is <strong>data structures and algorithms</strong> using C++, where I spend time solving competitive programming challenges and refining my problem-solving intuition.
+      </p>
+      <p>
+        Alongside that, I'm actively exploring <strong>web development</strong> — building projects, contributing to open-source, and sharing my work on GitHub. I believe in learning by doing, and every project teaches me something new.
+      </p>
+      <p>
+        I'm currently preparing for internships and working towards full-stack development, combining my strong fundamentals with modern web frameworks.
+      </p>
+    </div>
+    <div class="about-image-area">
+      <div class="about-card-big">
+        <div class="avatar-placeholder">EG</div>
+        <h3>Ezan Gulzar</h3>
+        <p>B.Tech CSE · AKTU University</p>
+        <p style="color: var(--text3); font-size:0.8rem;">Varanasi, India 📍</p>
+        <div class="about-tag-row">
+          <span class="badge">Open to Work</span>
+          <span class="badge">Learning</span>
+        </div>
+      </div>
+      <div class="about-float">🎯 Focusing on DSA & Web Dev</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label" data-num="02 —">Skills</div>
+  <div class="section-title">What I <em>Know</em></div>
+  <p class="section-desc">A mix of systems-level thinking and modern web development skills, all grounded in strong CS fundamentals.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Core Language</div>
+      <h3>C / C++</h3>
+      <p style="font-size:0.85rem; color:var(--text2);">My primary language for competitive programming and DSA. Comfortable with pointers, memory management, STL, and OOP.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">C++17</span>
+        <span class="skill-tag">STL</span>
+        <span class="skill-tag">OOP</span>
+        <span class="skill-tag">Pointers</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Algorithms</div>
+      <h3>DSA &amp; Problem Solving</h3>
+      <p style="font-size:0.85rem; color:var(--text2);">Actively solving problems on LeetCode. Familiar with sorting, searching, trees, graphs, DP, and more.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Arrays</span>
+        <span class="skill-tag">Trees</span>
+        <span class="skill-tag">Graphs</span>
+        <span class="skill-tag">DP</span>
+        <span class="skill-tag">Sorting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Language</div>
+      <h3>Python</h3>
+      <p style="font-size:0.85rem; color:var(--text2);">Used for scripting, automation, and beginner-level programming projects.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Scripting</span>
+        <span class="skill-tag">Automation</span>
+        <span class="skill-tag">Basics</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Language</div>
+      <h3>Java</h3>
+      <p style="font-size:0.85rem; color:var(--text2);">Academic and fundamental OOP concepts. Used in coursework and building foundational software.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">OOP</span>
+        <span class="skill-tag">Coursework</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Web Development</div>
+      <h3>HTML &amp; CSS</h3>
+      <p style="font-size:0.85rem; color:var(--text2);">Building static web pages and learning modern layouts with Flexbox and Grid.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">Flexbox</span>
+        <span class="skill-tag">Grid</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Tools</div>
+      <h3>Git &amp; GitHub</h3>
+      <p style="font-size:0.85rem; color:var(--text2);">Version control, project management, and open-source collaboration through GitHub repositories.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">Version Control</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label" data-num="03 —">Experience</div>
+  <div class="section-title">My <em>Journey</em></div>
+  <p class="section-desc">Hands-on learning, academic milestones, and real-world practice — building expertise day by day.</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2022 — Present</div>
+      <h3>B.Tech in Computer Science &amp; Engineering</h3>
+      <div class="org">AKTU University · Varanasi, India</div>
+      <p>Currently in my 3rd year pursuing a B.Tech in CSE. Coursework covers Data Structures, Algorithms, Computer Networks, Database Management, and Operating Systems.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2023 — Present</div>
+      <h3>DSA &amp; Competitive Programming</h3>
+      <div class="org">Self-Directed · LeetCode &amp; GitHub</div>
+      <ul>
+        <li>Solving DSA problems in C++ — arrays, trees, graphs, dynamic programming</li>
+        <li>Maintaining a public repository of LeetCode solutions</li>
+        <li>Building a strong foundation for technical interviews and internships</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2024 — Present</div>
+      <h3>Web Development &amp; Open Source</h3>
+      <div class="org">Self-Directed · GitHub</div>
+      <ul>
+        <li>Learning HTML, CSS, and exploring modern web frameworks</li>
+        <li>Publishing beginner projects and programs publicly on GitHub</li>
+        <li>Exploring Git workflows and open-source best practices</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2024 — Ongoing</div>
+      <h3>Internship Preparation</h3>
+      <div class="org">Goal: Full Stack Developer Role</div>
+      <p>Actively preparing for software internships — sharpening DSA skills, building a project portfolio, and working towards full-stack development capabilities.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label" data-num="04 —">Projects</div>
+  <div class="section-title">What I've <em>Built</em></div>
+  <p class="section-desc">A collection of programs, solutions, and experiments — all available on GitHub.</p>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">⚡</div>
+        <div class="project-links">
+          <a href="https://github.com/Ezangulzar314/cpp-programs" target="_blank" class="project-link" title="GitHub">↗</a>
+        </div>
+      </div>
+      <h3>cpp-programs</h3>
+      <p>A collection of basic C++ programs and DSA practice questions. Covers core language concepts, algorithms, and problem-solving patterns.</p>
+      <div class="project-lang"><span class="lang-dot cpp"></span> C++</div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">🧠</div>
+        <div class="project-links">
+          <a href="https://github.com/Ezangulzar314/leetcode-solutions" target="_blank" class="project-link" title="GitHub">↗</a>
+        </div>
+      </div>
+      <h3>leetcode-solutions</h3>
+      <p>LeetCode and DSA solutions implemented in C++. A growing repository of solutions organized by topic and difficulty level.</p>
+      <div class="project-lang"><span class="lang-dot cpp"></span> C++</div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">🔢</div>
+        <div class="project-links">
+          <a href="https://github.com/Ezangulzar314/calculator-cpp" target="_blank" class="project-link" title="GitHub">↗</a>
+        </div>
+      </div>
+      <h3>calculator-cpp</h3>
+      <p>A simple calculator program in C++ that performs basic arithmetic operations — addition, subtraction, multiplication, and division using switch-case statements.</p>
+      <div class="project-lang"><span class="lang-dot cpp"></span> C++</div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">🌐</div>
+        <div class="project-links">
+          <a href="https://github.com/Ezangulzar314/computer-network-lab" target="_blank" class="project-link" title="GitHub">↗</a>
+        </div>
+      </div>
+      <h3>computer-network-lab</h3>
+      <p>Computer Network lab programs and assignments. Covers core networking concepts with practical implementations as part of the B.Tech curriculum.</p>
+      <div class="project-lang"><span class="lang-dot"></span> General</div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">📊</div>
+        <div class="project-links">
+          <a href="https://github.com/Ezangulzar314/Data-structure-algorithms" target="_blank" class="project-link" title="GitHub">↗</a>
+        </div>
+      </div>
+      <h3>Data-structure-algorithms</h3>
+      <p>Implementations of fundamental data structures and algorithms from scratch — stacks, queues, linked lists, trees, sorting algorithms, and more.</p>
+      <div class="project-lang"><span class="lang-dot cpp"></span> C++</div>
+    </div>
+    <div class="project-card" style="border-style: dashed; opacity: 0.6; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 180px; gap: 0.5rem;">
+      <div style="font-size: 1.5rem;">+</div>
+      <h3 style="color: var(--text3);">More coming soon</h3>
+      <p style="text-align:center; font-size:0.82rem;">Always building something new. Check GitHub for the latest.</p>
+      <a href="https://github.com/Ezangulzar314" target="_blank" class="btn btn-outline" style="margin-top:0.5rem; font-size:0.8rem; padding: 0.5rem 1.2rem;">View all on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" data-num="05 —">Contact</div>
+  <div class="section-title">Let's <em>Connect</em></div>
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <h3>Open to internships,<br>collaborations &amp; opportunities.</h3>
+      <p>Whether you're a recruiter, fellow developer, or just want to chat about code — feel free to reach out. I'm always happy to connect and learn.</p>
+      <div class="contact-links">
+        <a href="https://github.com/Ezangulzar314" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🐙</div>
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-text">github.com/Ezangulzar314</div>
+          </div>
+        </a>
+        <a href="mailto:ezangulzar314@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-text">ezangulzar314@gmail.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="John Doe" />
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="john@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Hi Ezan, I'd like to..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="alert('Thanks for reaching out! This is a static portfolio — please email ezangulzar314@gmail.com directly.')">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 · Ezan Gulzar · Built with ❤️ from Varanasi</div>
+  <div class="footer-right">EG<span>.</span></div>
+</footer>
+
+</body>
+</html>
